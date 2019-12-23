@@ -28,14 +28,22 @@ RUN curl -sL -o rclone.zip https://downloads.rclone.org/v${RCLONE_VERSION}/rclon
  && rm rclone.zip rclone-v${RCLONE_VERSION}-linux-amd64 -fR \
  && rm /var/lib/apt/lists/* -fR
 
-RUN curl -sL -o restic.tar.gz https://github.com/restic/restic/releases/download/v${RESTIC_VERSION}/restic-${RESTIC_VERSION}.tar.gz \
- && echo "${RESTIC_SHA256}  restic.tar.gz" | sha256sum -c - \
+# RUN curl -sL -o restic.tar.gz  https://github.com/restic/restic/releases/download/v${RESTIC_VERSION}/restic-${RESTIC_VERSION}.tar.gz \
+#  && echo "${RESTIC_SHA256}  restic.tar.gz" | sha256sum -c - \
+#  && tar xzf restic.tar.gz \
+#  && cd restic-${RESTIC_VERSION} \
+#  && go run build.go \
+#  && mv restic /usr/local/bin/restic \
+#  && cd .. \
+#  && rm restic.tar.gz restic-${RESTIC_VERSION} -fR
+ 
+ RUN curl -sL -o restic.tar.gz https://github.com/ifedorenko/restic/archive/out-of-order-restore-no-progress.tar.gz \
  && tar xzf restic.tar.gz \
- && cd restic-${RESTIC_VERSION} \
+ && cd restic-out-of-order-restore-no-progress \
  && go run build.go \
  && mv restic /usr/local/bin/restic \
  && cd .. \
- && rm restic.tar.gz restic-${RESTIC_VERSION} -fR
+ && rm restic.tar.gz restic-out-of-order-restore-no-progress -fR
 
 #
 # Final image
