@@ -3,8 +3,8 @@
 #
 FROM golang:1.12 AS builder
 
-ARG RESTIC_VERSION=0.9.6
-ARG RESTIC_SHA256=1cc8655fa99f06e787871a9f8b5ceec283c856fa341a5b38824a0ca89420b0fe
+# ARG RESTIC_VERSION=0.9.6
+# ARG RESTIC_SHA256=1cc8655fa99f06e787871a9f8b5ceec283c856fa341a5b38824a0ca89420b0fe
 ARG GO_CRON_VERSION=0.0.4
 ARG GO_CRON_SHA256=6c8ac52637150e9c7ee88f43e29e158e96470a3aaa3fcf47fd33771a8a76d959
 ARG RCLONE_VERSION=1.49.5
@@ -37,6 +37,7 @@ RUN curl -sL -o rclone.zip https://downloads.rclone.org/v${RCLONE_VERSION}/rclon
 #  && cd .. \
 #  && rm restic.tar.gz restic-${RESTIC_VERSION} -fR
  
+ # based on restic 0.9.6
  RUN curl -sL -o restic.tar.gz https://github.com/ifedorenko/restic/archive/out-of-order-restore-no-progress.tar.gz \
  && tar xzf restic.tar.gz \
  && cd restic-out-of-order-restore-no-progress \
